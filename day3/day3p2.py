@@ -38,17 +38,23 @@ def calcScore(char):
 f = open("input.txt", "r")
 bags = f.read().split("\n")
 
-for bag in bags:
-    tmp = []
-    bagScore = 0
-    split = len(bag) / 2
-    firstHalf = bag[:int(split)]
-    secondHalf = bag[int(split):]
-    for a in firstHalf:
-        if (a in secondHalf):
-            if(a not in tmp) :
-                tmp.extend(a)
-    for item in tmp:
-        totalScore += calcScore(item)
+counter = 0
+groups = []
+tmp = []
+
+for line in bags:
+    tmp.append(line)
+    counter += 1
+    if (counter == 3):
+        groups.append(tmp)
+        tmp = []
+        counter = 0
+
+for group in groups:
+    badge = ""
+    for char in group[0]:
+        if (char in group[1] and char in group[2]):
+            badge = char
+    totalScore += calcScore(badge)
 
 print(totalScore)
