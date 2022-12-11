@@ -1,4 +1,4 @@
-f = open("input.txt", "r")
+f = open("test.txt", "r")
 line = f.read()
 
 marker = []
